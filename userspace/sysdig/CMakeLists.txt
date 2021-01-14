@@ -25,9 +25,6 @@ if(NOT WIN32)
 	include_directories("${CURSES_INCLUDE_DIR}")
 endif() # NOT WIN32
 
-include_directories("${PROJECT_SOURCE_DIR}/common")
-include_directories("${PROJECT_SOURCE_DIR}/userspace/libscap")
-include_directories("${PROJECT_SOURCE_DIR}/userspace/libsinsp")
 include_directories("${PROJECT_BINARY_DIR}/userspace/sysdig")
 include_directories(.)
 
@@ -49,6 +46,22 @@ endif()
 
 add_executable(sysdig ${SOURCE_FILES})
 add_executable(csysdig ${SOURCE_FILES_CSYSDIG})
+
+target_include_directories(
+	sysdig
+	PUBLIC
+		"${FALCOLIBS_SOURCE_DIR}/common"
+		"${FALCOLIBS_SOURCE_DIR}/userspace/libsinsp/third-party/jsoncpp"
+		"${FALCOLIBS_SOURCE_DIR}/userspace/libscap"
+		"${FALCOLIBS_SOURCE_DIR}/userspace/libsinsp")
+
+target_include_directories(
+	csysdig
+	PUBLIC
+		"${FALCOLIBS_SOURCE_DIR}/common"
+		"${FALCOLIBS_SOURCE_DIR}/userspace/libsinsp/third-party/jsoncpp"
+		"${FALCOLIBS_SOURCE_DIR}/userspace/libscap"
+		"${FALCOLIBS_SOURCE_DIR}/userspace/libsinsp")
 
 if(NOT WIN32)
 	include_directories(${PROJECT_BINARY_DIR}/driver/src)

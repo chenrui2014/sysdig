@@ -98,7 +98,7 @@ if(NOT WIN32)
 		endif()
 
 		if(NOT DEFINED PROBE_VERSION)
-			set(PROBE_VERSION "${SYSDIG_VERSION}")
+			set(PROBE_VERSION "${FALCOLIBS_VERSION}")
 		endif()
 		if(NOT DEFINED PROBE_NAME)
 			set(PROBE_NAME "sysdig-probe")
@@ -108,7 +108,6 @@ if(NOT WIN32)
 			set(PROBE_DEVICE_NAME "sysdig")
 		endif()
 
-		add_subdirectory(driver)
 		add_definitions(-DHAS_CAPTURE)
 	endif()
 
@@ -631,9 +630,8 @@ if(CREATE_TEST_TARGETS AND NOT WIN32)
 	endif()
 endif() # NOT WIN32
 
+include(falcolibs)
 add_subdirectory(userspace/sysdig)
-add_subdirectory(userspace/libscap)
-add_subdirectory(userspace/libsinsp)
 
 if(CREATE_TEST_TARGETS AND NOT WIN32)
 		# Add unit test directories
